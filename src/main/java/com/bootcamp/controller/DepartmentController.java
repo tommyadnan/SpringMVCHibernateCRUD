@@ -29,7 +29,7 @@ public class DepartmentController {
     public ModelAndView ListDepartment(ModelAndView model) throws IOException{
         List<Department> listDepartment= departmentService.getAllDepartments();
         model.addObject("listdepartment",listDepartment);
-        model.setViewName("department");
+        model.setViewName("List");
         return model;
     }
 
@@ -37,7 +37,7 @@ public class DepartmentController {
     public ModelAndView newDepartment(ModelAndView model){
         Department department = new Department();
         model.addObject("department",department);
-        model.setViewName("DepartmentForm");
+        model.setViewName("Form");
         return model;
     }
 
@@ -48,21 +48,21 @@ public class DepartmentController {
         }else{
             departmentService.updateDepartment(department);
         }
-        return new ModelAndView("redirect:/department");
+        return new ModelAndView("redirect:");
     }
 
     @RequestMapping(value = "deleteDepartment", method = RequestMethod.GET)
     public ModelAndView deleteDepartment(HttpServletRequest request){
-        int departmentId=Integer.parseInt(request.getParameter("id"));
+        int departmentId=Integer.parseInt(request.getParameter("Id"));
         departmentService.deleteDepartment(departmentId);
-        return new ModelAndView("redirect:/department");
+        return new ModelAndView("redirect:");
     }
 
     @RequestMapping(value = "editDepartment", method = RequestMethod.GET)
     public ModelAndView editDepartment(HttpServletRequest request){
-        int departmentId = Integer.parseInt(request.getParameter("id"));
+        int departmentId = Integer.parseInt(request.getParameter("Id"));
         Department department = departmentService.getDepartment(departmentId);
-        ModelAndView model = new ModelAndView("departmentForm");
+        ModelAndView model = new ModelAndView("forms/DepartmentForm");
         model.addObject("department",department);
         return model;
     }

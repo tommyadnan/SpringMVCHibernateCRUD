@@ -1,6 +1,8 @@
 package com.bootcamp.controller;
 
+import com.bootcamp.model.Department;
 import com.bootcamp.model.Employee;
+import com.bootcamp.service.DepartmentService;
 import com.bootcamp.service.EmployeeService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class EmployeeController {
     public ModelAndView ListEmployee(ModelAndView model) throws IOException{
         List<Employee> listEmployee= employeeService.getAllEmployees();
         model.addObject("listemployee",listEmployee);
-        model.setViewName("employee");
+        model.setViewName("List");
         return model;
     }
 
@@ -37,7 +39,8 @@ public class EmployeeController {
     public ModelAndView newContact(ModelAndView model){
         Employee employee = new Employee();
         model.addObject("employee",employee);
-        model.setViewName("EmployeeForm");
+        model.setViewName("Form");
+
         return model;
     }
 
@@ -48,21 +51,21 @@ public class EmployeeController {
         }else{
             employeeService.updateEmployee(employee);
         }
-        return new ModelAndView("redirect:/employee");
+        return new ModelAndView("redirect:");
     }
 
     @RequestMapping(value = "deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request){
-        int employeeId=Integer.parseInt(request.getParameter("id"));
+        int employeeId=Integer.parseInt(request.getParameter("Id"));
         employeeService.deleteEmployee(employeeId);
-        return new ModelAndView("redirect:/employee");
+        return new ModelAndView("redirect:");
     }
 
     @RequestMapping(value = "editEmployee",method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request){
-        int employeeId = Integer.parseInt(request.getParameter("id"));
+        int employeeId = Integer.parseInt(request.getParameter("Id"));
         Employee employee = employeeService.getEmployee(employeeId);
-        ModelAndView model = new ModelAndView("employeeForm");
+        ModelAndView model = new ModelAndView("forms/EmployeeForm");
         model.addObject("employee",employee);
         return model;
     }
