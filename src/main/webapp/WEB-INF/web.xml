@@ -6,14 +6,12 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <context-param>
-    <param-name>contexConfiguration</param-name>
-    <param-value>/WEB-INF/spring servlet.xml</param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/spring-servlet.xml</param-value>
   </context-param>
-  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  
   <servlet>
     <servlet-name>spring</servlet-name>
     <servlet-class>
@@ -21,4 +19,8 @@
     </servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 </web-app>
