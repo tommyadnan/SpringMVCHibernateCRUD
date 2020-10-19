@@ -14,25 +14,26 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "employee")
 public class EmployeeController {
     public static final Logger logger = Logger.getLogger(EmployeeController.class);
 
     public EmployeeController(){
-        System.out.println("System Controller");
+        System.out.println("Employee Controller");
     }
 
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "")
     public ModelAndView ListEmployee(ModelAndView model) throws IOException{
         List<Employee> listEmployee= employeeService.getAllEmployees();
         model.addObject("listemployee",listEmployee);
-        model.setViewName("Home");
+        model.setViewName("employee");
         return model;
     }
 
-    @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
+    @RequestMapping(value = "newEmployee", method = RequestMethod.GET)
     public ModelAndView newContact(ModelAndView model){
         Employee employee = new Employee();
         model.addObject("employee",employee);
@@ -40,24 +41,24 @@ public class EmployeeController {
         return model;
     }
 
-    @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(ModelAndView model,Employee employee){
+    @RequestMapping(value = "saveEmployee", method = RequestMethod.POST)
+    public ModelAndView saveEmployee(Employee employee){
         if(employee.getId()==0){
             employeeService.addEmployee(employee);
         }else{
             employeeService.updateEmployee(employee);
         }
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/employee");
     }
 
-    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request){
         int employeeId=Integer.parseInt(request.getParameter("id"));
         employeeService.deleteEmployee(employeeId);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/employee");
     }
 
-    @RequestMapping(value = "/editEmployee",method = RequestMethod.GET)
+    @RequestMapping(value = "editEmployee",method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request){
         int employeeId = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployee(employeeId);
