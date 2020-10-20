@@ -24,12 +24,12 @@
                 <td>${employee.telephone}</td>
                 <td>${employee.department.name}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/employee/editEmployee?Id=${employee.id}">edit</a>
-                    <a href="${pageContext.request.contextPath}/employee/deleteEmployee?Id=${employee.id}">delete</a>
+                    <a href="${pageContext.request.contextPath}/employee/editEmployee?id=${employee.id}">edit</a>
+                    <a href="${pageContext.request.contextPath}/employee/deleteEmployee?id=${employee.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <h4>
-        new Employee Register <a href="${pageContext.request.contextPath}/employee/newEmployee?Id">here</a>
+        new Employee Register <a href="${pageContext.request.contextPath}/employee/newEmployee?id">here</a>
     </h4>

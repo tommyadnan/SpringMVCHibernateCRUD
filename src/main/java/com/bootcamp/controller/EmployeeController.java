@@ -7,6 +7,7 @@ import com.bootcamp.service.EmployeeService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,7 +46,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "saveEmployee", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(Employee employee){
+    public ModelAndView saveEmployee(@ModelAttribute Employee employee){
         if(employee.getId()==0){
             employeeService.addEmployee(employee);
         }else{
@@ -56,14 +57,14 @@ public class EmployeeController {
 
     @RequestMapping(value = "deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request){
-        int employeeId=Integer.parseInt(request.getParameter("Id"));
+        int employeeId=Integer.parseInt(request.getParameter("id"));
         employeeService.deleteEmployee(employeeId);
         return new ModelAndView("redirect:");
     }
 
     @RequestMapping(value = "editEmployee",method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request){
-        int employeeId = Integer.parseInt(request.getParameter("Id"));
+        int employeeId = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView model = new ModelAndView("forms/EmployeeForm");
         model.addObject("employee",employee);
