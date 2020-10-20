@@ -15,12 +15,12 @@
             <tr>
                 <td>${department.name}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/department/editDepartment?Id=${department.id}">edit</a>
-                    <a href="${pageContext.request.contextPath}/department/deleteDepartment?Id=${department.id}">delete</a>
+                    <a href="${pageContext.request.contextPath}/department/editDepartment?id=${department.id}">edit</a>
+                    <a href="${pageContext.request.contextPath}/department/deleteDepartment?id=${department.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <h4>
-        add Department <a href="${pageContext.request.contextPath}/department/newDepartment?Id">here</a>
+        add Department <a href="${pageContext.request.contextPath}/department/newDepartment?id">here</a>
     </h4>
